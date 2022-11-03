@@ -116,9 +116,9 @@ class BaseResolver
     {
         let finalPath = prefinalPath; 
         
+        finalPath = this.normalizeRootPath(finalPath);
         finalPath = this.normalizeFolder(finalPath)
         finalPath = this.normalizeExtension(finalPath);
-        finalPath = this.normalizeRootPath(finalPath);
 
         return finalPath;
     }

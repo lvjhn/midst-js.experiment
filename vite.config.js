@@ -10,17 +10,17 @@ export default defineConfig({
     vue()
   ],
 
-  /** Dependency Pre-bundling */
-  optimizeDeps: {
-    include: [
-      "@/app"
-    ]
-  },
-
   /** Custom Aliases */
   resolve: {
     alias: [
       ...(new CustomAliases()).resolvers()
     ]
-  }
+  },
+
+  /** Dependency Pre-bundling */
+  optimizeDeps: {
+    include: [
+      "@/app/index.js"
+    ]
+  },
 })

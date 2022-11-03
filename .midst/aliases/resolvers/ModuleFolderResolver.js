@@ -114,7 +114,44 @@ class ModuleFolderResolver extends BaseResolver
      */
     handleSiteAlias() 
     {
+        const importee = this.context.importee;
+        const importer = this.context.importer;
+        const importeeTail = this.importeeTail();
+        const importerTail = this.importerTail(); 
+
+        const moduleId = Modules.id(importerTail); 
+        const modulePath = Modules.path(moduleId); 
+        const sitesPath = modulePath + "/@sites"; 
+
+        let tail = importerTail.split(modulePath).join("");
+        tail = tail.substring("/@sites".length); 
         
+        const prefinalPath = sitesPath + tail; 
+        
+        return prefinalPath;
+    }
+
+    /** 
+     * Handle subsite aliases
+     * 
+     */
+    handleSubsiteAlias(site) 
+    {
+        const importee = this.context.importee;
+        const importer = this.context.importer;
+        const importeeTail = this.importeeTail();
+        const importerTail = this.importerTail(); 
+
+        const moduleId = Modules.id(importerTail); 
+        const modulePath = Modules.path(moduleId); 
+        const sitesPath = modulePath + "/@sites"; 
+
+        let tail = importerTail.split(modulePath).join("");
+        tail = tail.split("/").slice(3).join("");
+        
+        const prefinalPath = sitesPath + "/" + site + "/" + tail; 
+        
+        return prefinalPath;
     }
 
     /**
@@ -122,15 +159,15 @@ class ModuleFolderResolver extends BaseResolver
      */
     handleWwwAlias() 
     {
-       
-    }
+        return this.handleSubsiteAlias("www");
+    }   
 
     /**
      * Handle Mobile Alias
      */
     handleMobileAlias() 
     {
-     
+        return this.handleSubsiteAlias("mobile");
     }
 
     /**
@@ -138,7 +175,7 @@ class ModuleFolderResolver extends BaseResolver
      */
     handleCommonAlias() 
     {
-        
+        return this.handleSubsiteAlias("common");
     }
 }
 

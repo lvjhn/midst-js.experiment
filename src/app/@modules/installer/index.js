@@ -7,7 +7,6 @@ import CommonAutoRoutes from './@sites/common/routes/_auto'
 
 import ModList from "./_modules"
 
-
 export default {
     
     /** ===== MODULE INFO ===== */ 

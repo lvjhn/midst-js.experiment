@@ -4,7 +4,9 @@
  */
 import CLI from './.midst/cli/CLI.js'
 
-const rawArgs = process.argv.slice(2); 
-const cli = new CLI(rawArgs);
-await cli.start();
+export default (async () => {
+    const rawArgs = process.argv.slice(2); 
+    const cli = new CLI(rawArgs);
+    await cli.start();
+})();
 

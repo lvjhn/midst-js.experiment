@@ -31,7 +31,7 @@ class ModuleCommands
             this.deleteModule();
             
         // ----- views ----- //
-        if(command == "create:view") 
+        else if(command == "create:view") 
             this.createView(); 
         else if(command == "delete:view")   
             this.deleteView(); 

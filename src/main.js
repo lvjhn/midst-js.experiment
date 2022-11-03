@@ -1,13 +1,32 @@
 /** 
  * APPLICATION ENTRY SCRIPT  
  */
-// import { createApp } from "vue"
+import AppLoader from "@start://AppLoader"
 
-// import RootModule from "@/app"
-// import App from '@/App.vue'
+/** Declare a global application variable that can be used anywhere. */
+window.$app = {};
 
-// const app = createApp(App); 
+/** Main Function of the Application*/
+async function main() {
 
-// app.mount("#app");
+    /**
+     * You can add code to run before the app is loaded here. 
+     */
 
-import InstallerIndex from '#module:/app.auth.sign_up/test.js'
+    const appLoader = new AppLoader(); 
+    await appLoader.initApp();
+
+    /** 
+     * You can add code to run after the app is mounted here.
+     */
+}
+
+/** Run main function. */
+console.log("# Loading application...")
+main()
+    .then(() => {
+        console.log("# @/main.js : Finished loading app.")
+    })
+    .catch((err) => {
+        console.error("# @/main.js : There was an error in loading the app >> Error: " + err + " <<")
+    });

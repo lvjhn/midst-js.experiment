@@ -39,16 +39,16 @@ class SourceFolderResolver extends BaseResolver
 
         const pathMap = {
             '@'             : () => dirPath('/src/'),
-            '@app:'         : () => dirPath('/src/app/'),
-            '@assets:'      : () => dirPath('/src/assets/'), 
-            '@config'       : () => dirPath('/src/config/'),
-            '@libraries'    : () => dirPath('/src/config/libraries/'),
-            '@registries'   : () => dirPath('/src/config/registries/'),
-            '@settings'     : () => dirPath('/src/config/settings/'),
-            '@scripts:'     : () => dirPath('/src/scripts/'), 
-            '@start:'       : () => dirPath('/src/start/'), 
-            '@helpers:'     : () => dirPath('/src/start/helpers/'),
-            '@facades:'     : () => dirPath('/src/start/facades/')
+            '@app:'         : () => dirPath('/src/app'),
+            '@assets:'      : () => dirPath('/src/assets'), 
+            '@config'       : () => dirPath('/src/config'),
+            '@libraries'    : () => dirPath('/src/config/libraries'),
+            '@registries'   : () => dirPath('/src/config/registries'),
+            '@settings'     : () => dirPath('/src/config/settings'),
+            '@scripts:'     : () => dirPath('/src/scripts'), 
+            '@start:'       : () => dirPath('/src/start'), 
+            '@helpers:'     : () => dirPath('/src/start/helpers'),
+            '@facades:'     : () => dirPath('/src/start/facades')
         }
 
         const prePath = pathMap[alias](); 

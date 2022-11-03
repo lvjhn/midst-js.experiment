@@ -51,6 +51,9 @@ class Modules
 
         moduleId += "." + chain.join(".");
 
+        if(moduleId.at(-1) == ".")
+            moduleId = moduleId.substring(0, moduleId.length - 1);
+
         return moduleId;
     }
 

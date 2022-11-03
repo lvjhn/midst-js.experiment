@@ -7,7 +7,6 @@ import fs from 'fs'
 import colors from 'colors'
 
 import Modules from '../utils/modules/Modules.js'
-import { Module } from 'module';
 
 class ModuleScaffolder
 {
@@ -22,7 +21,7 @@ class ModuleScaffolder
         /** ----- Check if module already exists ----- */
         console.log("@ Checking if module already exists.");
         if(fs.existsSync(modulePath) && !("force" in options)) {
-            console.log(colors.red("! Error: Module already exists."));
+            console.log(colors.red("! Error: Module already exists, use --force to overwrite."));
             console.log("@ Aborted.") 
             process.exit();
         } 

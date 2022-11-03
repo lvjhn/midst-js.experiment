@@ -41,9 +41,16 @@
       }
     </style>
 
+    <!-- load the vue.min.js (browser version) for loading screen -->
+    <script type="module" src="/libs/vue.min.js"></script>
+
     <!-- script for loading screen -->
     <link rel="stylesheet" href="/resources/loading-screen/style.css" />
     <script src="/resources/loading-screen/script.js"></script>
+
+    
+    <!-- Declare a global application variable that can be used anywhere --> 
+    <script>window.$app = {};</script>
 
     <!-- load the application's main script -->
     <script type="module" src="/src/main.js"></script>
@@ -63,13 +70,13 @@
 
     <!-- application root component container -->
     <div id="app">
-      <!-- stuff to display while the application is being loaded -->
-      <div class="loading-screen"> 
-        Loading app...
-      </div>
+   
     </div>
 
     <!-- load toastify library -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+    <!-- set-up the loading screen -->
+    <script type="module" src="/resources/loading-screen/script.js"></script>
   </body>
 </html>

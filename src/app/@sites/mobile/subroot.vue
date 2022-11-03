@@ -1,19 +1,62 @@
 <!--
-    COMPONENT FILE
-    Note: This is just a draft. This will be replaced by the 
-    actual version later on.
+   | COMPONENT FILE
+   | Type: subroot
+   | Name: mobile-subroot
   --> 
 
+<!-- Script Section ----------------------------------------------------------------------------------------------------------->
 <script setup> 
-  console.log("@ Hello, from home.vue!")
+    /** ===== Imports =============== */
+    import { ref, computed, watch, onMounted, getCurrentInstance } from 'vue' 
+    import { useWindowSize } from 'vue-window-size'
+
+    /** ===== Set-up =============== */
+    const instance = getCurrentInstance(); 
+    const props = defineProps([]); 
+    const emits = defineEmits([]); 
+    const { width: windowWidth, height: windowHeight} = useWindowSize();
+
+    /** ===== Data =============== */
+    // const foo = ref("hello");
+    // const bar = ref("world!"); 
+    // const baz = computed(() => foo.value + bar.value); 
+
+    /** ===== Lifecycle =============== */
+    onMounted(() => {
+        const refs = instance.refs; 
+        resizeTrait();
+    })
+
+    function resizeTrait() {
+        handleResize(); 
+        watch([ windowWidth, windowHeight ], handleResize);
+    }
+
+    /** ===== Functions =============== */
+    function handleResize() {
+        const refs = instance.refs; 
+        const self = refs.self;
+        console.log("@ Resizing...");
+    } 
+
 </script> 
 
+<!-- Template Section ---------------------------------------------------------------------------------------------------------> 
 <template> 
-  <div class="site-subroot"> 
-    Hello, from home.vue!
-  </div> 
+    <site-view 
+        component-type="subroot"
+        component-name="mobile-subroot"
+        ref="self"> 
+        <blank-layout> 
+            Hello, World! - from <b>mobile-subroot</b>#
+        </blank-layout>
+    </site-view> 
 </template> 
 
+<!-- Style Section ------------------------------------------------------------------------------------------------------------> 
 <style scoped> 
-
+    [component-name="mobile-subroot"] 
+    {
+        display: inherit;
+    }
 </style> 

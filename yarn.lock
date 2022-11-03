@@ -386,6 +386,13 @@ vite@^3.2.0:
   optionalDependencies:
     fsevents "~2.3.2"
 
+vue-window-size@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/vue-window-size/-/vue-window-size-1.0.8.tgz#849665caadcef0ad9849b067166048d86c58494d"
+  integrity sha512-nd4UoMWmp1zVcj8f9LMli9i7YJEhjV5Oo5ieqt68ssMRc77Hnud6OcrjYzY95Bv/1zFuXWJUIqR/SCde0KORIg==
+  dependencies:
+    window-resize-subject "^1.5.0"
+
 vue@^3.2.41:
   version "3.2.41"
   resolved "https://registry.yarnpkg.com/vue/-/vue-3.2.41.tgz#ed452b8a0f7f2b962f055c8955139c28b1c06806"
@@ -396,3 +403,8 @@ vue@^3.2.41:
     "@vue/runtime-dom" "3.2.41"
     "@vue/server-renderer" "3.2.41"
     "@vue/shared" "3.2.41"
+
+window-resize-subject@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/window-resize-subject/-/window-resize-subject-1.5.0.tgz#a866128119c3899a8c03cfd1b86decf883e595a4"
+  integrity sha512-r+zXdtumr1+De51Lb3P561K+3t6PvEVXq+dTaEhikNY8Hj0UuzkYL3v9jo5TLpPaL7s9gkaX3Sb643HqYT7uSA==

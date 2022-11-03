@@ -1,23 +1,22 @@
 /** 
- * VIEW SCAFFOLDER
+ * COMPONENT SCAFFOLDER
  */
 import ModularPartScaffolder from "./bases/ModularPartScaffolder.js";
 
-class ViewScaffolder extends ModularPartScaffolder {
+class ComponentScaffolder extends ModularPartScaffolder {
 
     defineOutputFolder() {
-        return "views"
+        return "components"
     }
 
     defineTemplateFile() 
     {
-        return "./.midst/templates/components/view.template.vue"
+        return "./.midst/templates/components/component.template.vue"
     }
 
     defineReplaceMap(site) 
     {
         return {
-            "#{SITE_NAME}#" : site, 
             "#{COMPONENT_NAME}#" : this.lastName()
         } 
     }
@@ -34,4 +33,4 @@ class ViewScaffolder extends ModularPartScaffolder {
 
 }
 
-export default ViewScaffolder;
+export default ComponentScaffolder;

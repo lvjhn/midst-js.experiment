@@ -3,28 +3,27 @@
  */
 import ModularPartScaffolder from "./bases/ModularPartScaffolder.js";
 
-class ViewScaffolder extends ModularPartScaffolder {
+class StoreScaffolder extends ModularPartScaffolder {
 
     defineOutputFolder() {
-        return "views"
+        return "stores"
     }
 
     defineTemplateFile() 
     {
-        return "./.midst/templates/components/view.template.vue"
+        return "./.midst/templates/scripts/store.template.js"
     }
 
     defineReplaceMap(site) 
     {
         return {
-            "#{SITE_NAME}#" : site, 
-            "#{COMPONENT_NAME}#" : this.lastName()
+            "#{STORE_ID}#" : this.moduleId + ":" + this.siteSpec + ":" + this.pathSpec
         } 
     }
 
     defineExtension() 
     {
-        return "vue"
+        return "js"
     }
 
     defineResolve(outStr) 
@@ -34,4 +33,4 @@ class ViewScaffolder extends ModularPartScaffolder {
 
 }
 
-export default ViewScaffolder;
+export default StoreScaffolder;

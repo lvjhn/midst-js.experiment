@@ -38,7 +38,7 @@ class BaseResolver
      * Resolver function, get's executed when alias is found
      */
     defineResolver(alias, importer, importee) {
-        throw Error("This method (defineResolver) must be defined.");
+        throw Error("This method (defineResolver) must be defined manually.");
     }
 
     /**
@@ -81,7 +81,7 @@ class BaseResolver
      */
     defineAliases(aliases) 
     {       
-        throw Error("This method (defineAliases) must be defined.");
+        throw Error("This method (defineAliases) must be defined manually.");
     }
 
     /** 

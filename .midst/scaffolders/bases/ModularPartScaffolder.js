@@ -7,56 +7,10 @@ import fs from 'fs'
 import colors from 'colors'; 
 import Modules from '../../utils/modules/Modules.js';
 
-class ModularPartScaffolder 
+import BaseScaffolder from './BaseScaffolder.js';
+
+class ModularPartScaffolder extends BaseScaffolder
 {
-    constructor(moduleId, siteSpec, pathSpec) 
-    {
-        this.moduleId = moduleId; 
-        this.pathSpec = pathSpec;
-        this.siteSpec = siteSpec;
-    }
-
-    /**
-     * Placeholder function for the template file definition. 
-     */
-    defineTemplateFile() 
-    {
-        return ""; 
-    }
-
-    /** 
-     * Placehoder for the resolver function for template file content.
-     */
-    defineResolve(templateStr, site) 
-    {
-        return ""; 
-    }
-
-    /** 
-     * Placeholder for replace map definition. 
-     */
-    defineReplaceMap(templateStr, site, replaceMap) 
-    {
-        return {}; 
-    }
-
-    /** 
-     * Placeholder for output container
-     */
-    defineOutputContainer() 
-    {
-        return "components/"
-    }
-
-    /** 
-     * Placeholder for extension
-    */
-    defineExtension() 
-    {
-        return "vue"
-    }
-
-
     /** 
      * Create driver
      */
@@ -75,22 +29,23 @@ class ModularPartScaffolder
             console.log("@ Applying resolver."); 
             let outStr = this.defineResolve(templateStr, site, replaceMap); 
             
-            console.log("@ Resolving replace map.")
+            console.log("@ Applying replace map.")
             for(let key in replaceMap) {
                 const val = replaceMap[key]; 
-                outStr.replaceAll[key] = val;
+                outStr = outStr.replaceAll(key, val);
             }
 
+            /** ===== determine output file ===== */
             const modulePath = Modules.path(this.moduleId);
             const pathSpec = this.pathSpec;
-            const outputContainer =  this.defineOutputContainer();
+            const outputFolder =  this.defineoutputFolder();
       
             const outFile = 
                 modulePath + "/@sites/" + site + "/" + 
-                outputContainer + "/" + pathSpec + "." + ext;
-            const parentDir = path.dirname(outFile); 
-
+                outputFolder + "/" + pathSpec + "." + ext;
+                
             console.log("@ Ensuring parent directories exists."); 
+            const parentDir = path.dirname(outFile); 
             if(!fs.existsSync(parentDir))
                 fs.mkdirSync(parentDir, { recursive: true }); 
 
@@ -110,28 +65,17 @@ class ModularPartScaffolder
         for(let site of siteSpecParts) {
             const modulePath = Modules.path(this.moduleId);
             const pathSpec = this.pathSpec;
-            const outputContainer =  this.defineOutputContainer();
+            const outputFolder =  this.defineoutputFolder();
       
             const outFile = 
                 modulePath + "/@sites/" + site + "/" +
-                outputContainer + "/" + pathSpec + "." + ext;
+                outputFolder + "/" + pathSpec + "." + ext;
 
-            if(fs.existsSync(outFile)) {
-                console.log("@ File found, deleting.")
-                fs.unlinkSync(outFile);
-                
-                console.log("@ Pruning anscestor folders until the first non-empty."); 
-                let ansPath = path.dirname(outFile); 
-                while(fs.readdirSync(ansPath).length == 0) {
-                    fs.rmSync(ansPath, { recursive: true }); 
-                    ansPath = path.dirname(ansPath); 
-                }
-            } 
-            else {
-                console.log(colors.yellow("! File not found, skipping.")); 
-            }
+            this.tryDeleteFile(outFile, outStr);
         }
     }
+
+ 
 }
 
 export default ModularPartScaffolder;

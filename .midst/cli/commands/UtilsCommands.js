@@ -4,10 +4,13 @@
  * Defines different commands for utility context.
  */
 import colors from 'colors';
-import { exec } from 'child_process'
+import fs from 'fs'
 
 import Modules from '../../utils/modules/Modules.js';
 import Routes from '../../utils/routes/Routes.js';
+
+import LibraryScaffolder from '../../scaffolders/LibraryScaffolder.js';
+import SettingsScaffolder from '../../scaffolders/SettingsScaffolder.js';
 
 class UtilsCommands 
 {
@@ -23,10 +26,24 @@ class UtilsCommands
     {
         const { context, command, options, kwOptions } = this.context.parsedArgs;
 
-        if(command == "scan:modules")
+        
+        if(command == "create:env") 
+            await this.createEnv(); 
+        
+        else if(command == "scan:modules")
             await this.scanModules();
         else if(command == "scan:routes")   
             await this.scanRoutes();
+
+        else if(command == "create:library")
+            await this.createLibrary(); 
+        else if(command == "delete:library")
+            await this.deleteLibrary();
+        
+        else if(command == "create:settings")
+            await this.createSettings(); 
+        else if(command == "delete:settings")
+            await this.deleteSettings();
 
         else {
             console.log(colors.red("@ Unknown command [" + command + "]")); 
@@ -54,6 +71,70 @@ class UtilsCommands
         await Routes.scan();
         console.log(colors.green("@ Done."));
     }
+
+    /** 
+     * Create environment file by copying the one in the templates. 
+     */
+    async createEnv() 
+    {
+        console.log("@ Creating environment file."); 
+        fs.copyFileSync("./.midst/templates/env/env.template", ".env");  
+        console.log(colors.green("@ Done.")); 
+    }
+
+    /** 
+     * Generic source file scaffolding
+     */
+    async genericSourceFileScaffolding(label, Scaffolder, mode) 
+    {
+        const { context, command, options, kwOptions } = this.context.parsedArgs;
+        const moduleId = context;
+
+        let operation;
+        
+        if(mode == "create") 
+            operation = "Creating"
+        else if(mode == "delete") 
+            operation = "Deleting"
+            
+        console.log("@ " + operation + " " + label + " [" + options[0] + "]."); 
+        const scaffolder = new Scaffolder(moduleId, options[0], null, kwOptions);
+        scaffolder[mode](); 
+        console.log(colors.green("@ Done."));
+    }
+
+    /** 
+     * Library creation command
+     */
+    async createLibrary() 
+    {
+        await this.genericSourceFileScaffolding("library", LibraryScaffolder, "create")
+    }
+
+    /**
+     * Library deletion command
+     */
+    async deleteLibrary() 
+    {
+        await this.genericSourceFileScaffolding("library", LibraryScaffolder, "delete")
+    }
+
+    /** 
+     * Settings creation command
+     */
+    async createSettings() 
+    {
+        await this.genericSourceFileScaffolding("settings", SettingsScaffolder, "create")
+    }
+
+    /**
+     * Settings deletion command
+     */
+    async deleteSettings() 
+    {
+        await this.genericSourceFileScaffolding("settings", SettingsScaffolder, "delete")
+    }
+    
 }
 
 export default UtilsCommands;

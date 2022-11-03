@@ -3,8 +3,6 @@
  */
 import AppLoader from "@start://AppLoader"
 
-/** Declare a global application variable that can be used anywhere. */
-window.$app = {};
 
 /** Main Function of the Application*/
 async function main() {

@@ -3,7 +3,6 @@
  * Loads the application as prepared by midst
  */
 
-
 class AppLoader 
 {   
     constructor() 
@@ -28,6 +27,7 @@ class AppLoader
         $app.modules.ROOT = (await import("@/app/index.js")).default; 
         console.log("# AppLoader : Finished loading module root..."); 
     }
+
 }
 
 export default AppLoader;

@@ -38,7 +38,7 @@ class ModularPartScaffolder extends BaseScaffolder
             /** ===== determine output file ===== */
             const modulePath = Modules.path(this.moduleId);
             const pathSpec = this.pathSpec;
-            const outputFolder =  this.defineoutputFolder();
+            const outputFolder =  this.defineOutputFolder();
       
             const outFile = 
                 modulePath + "/@sites/" + site + "/" + 

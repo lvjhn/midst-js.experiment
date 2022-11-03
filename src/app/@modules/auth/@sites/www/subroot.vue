@@ -36,7 +36,6 @@
     function handleResize() {
         const refs = instance.refs; 
         const self = refs.self;
-        console.log("@ Resizing...");
     } 
 
 </script> 

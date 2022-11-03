@@ -41,16 +41,16 @@
       }
     </style>
 
-    <!-- load the vue.min.js (browser version) for loading screen -->
-    <script type="module" src="/libs/vue.min.js"></script>
-
-    <!-- script for loading screen -->
-    <link rel="stylesheet" href="/resources/loading-screen/style.css" />
-    <script src="/resources/loading-screen/script.js"></script>
-
-    
-    <!-- Declare a global application variable that can be used anywhere --> 
-    <script>window.$app = {};</script>
+    <!-- declare a global application variable that can be used anywhere --> 
+    <script>
+      /** 
+       * Namespaces under the $app variable that needs to be accessible 
+       * before AppLoader is initialized needs to be put here. 
+       */
+      window.$app   = {};
+      $app.settings = {};
+      $app.helpers  = {};
+    </script>
 
     <!-- load the application's main script -->
     <script type="module" src="/src/main.js"></script>
@@ -68,15 +68,10 @@
       Brave, Edge, etc. 
     </noscript>
 
-    <!-- application root component container -->
+    <!-- container for the vue root instance -->
     <div id="app">
-   
+      <!-- application will be rendered here-->
     </div>
 
-    <!-- load toastify library -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-
-    <!-- set-up the loading screen -->
-    <script type="module" src="/resources/loading-screen/script.js"></script>
   </body>
 </html>

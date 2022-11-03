@@ -78,7 +78,14 @@ class UtilsCommands
     async createEnv() 
     {
         console.log("@ Creating environment file."); 
-        fs.copyFileSync("./.midst/templates/env/env.template", ".env");  
+
+        if(fs.existsSync(".env") && !("force" in this.context.parsedArgs.kwOptions)) {
+            console.log(colors.red("! Error: Item already exists, use --force to overwrite."));
+            console.log("@ Aborted.") 
+            process.exit();
+        } 
+
+        fs.copyFileSync("./.midst/templates/env/.env.template", ".env");  
         console.log(colors.green("@ Done.")); 
     }
 

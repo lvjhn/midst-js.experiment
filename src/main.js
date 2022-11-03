@@ -3,7 +3,6 @@
  */
 import AppLoader from "@start://AppLoader"
 
-
 /** Main Function of the Application*/
 async function main() {
 
@@ -20,11 +19,12 @@ async function main() {
 }
 
 /** Run main function. */
-console.log("# Loading application...")
+console.log("# @/main.js: Starting AppLoader...")
 main()
     .then(() => {
-        console.log("# @/main.js : Finished loading app.")
+        console.log("# @/main.js: Finished using AppLoader.")
     })
     .catch((err) => {
-        console.error("# @/main.js : There was an error in loading the app >> Error: " + err + " <<")
+        console.error("# @/main.js: There was an error in loading the app"); 
+        console.error(err);
     });

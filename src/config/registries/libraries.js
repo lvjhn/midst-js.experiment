@@ -7,35 +7,41 @@
  * Load non-conditionally loaded libraries here.
  */
 
-// ===== core ===== //
-import LoadVueRouter from "@libraries://core/vue-router" 
-await LoadVueRouter(); 
+const libraries = [];
 
-import LoadPinia from '@libraries://core/pinia'
-await LoadPinia();
+// ===== core ===== //
+import loadVueRouter from "@libraries://core/vue-router" 
+libraries.push(loadVueRouter);
+
+import loadPinia from '@libraries://core/pinia'
+libraries.push(loadPinia);
 
 // ===== clients ===== //
 import loadAxios from "@libraries://clients/axios"
-await loadAxios();
+libraries.push(loadAxios);
 
 import loadGraphQLRequest from "@libraries://clients/graphql-request"
-await loadGraphQLRequest(); 
+libraries.push(loadGraphQLRequest);
 
 import loadLaravelEcho from "@libraries://clients/laravel-echo"
-await loadLaravelEcho(); 
+libraries.push(loadLaravelEcho);
 
 // ===== ui ===== //
 import loadVueApexCharts from "@libraries://ui/vue-apexcharts"
-await loadVueApexCharts();
+libraries.push(loadVueApexCharts);
 
 import loadVueDraggable from "@libraries://ui/vue-draggable"
-await loadVueDraggable(); 
+libraries.push(loadVueDraggable);
 
 // ===== utils ===== //
 import loadChance from "@libraries://utils/chance"
-await loadChance();
+libraries.push(loadChance);
 
 export default async () => {
+
+    for(let runnable of libraries) {
+        await runnable();
+    }
 
     /** 
      * Libraries that require conditions to be loaded

@@ -46,7 +46,7 @@
         component-type="root"
         component-name="App"
         ref="self"> 
-        Hello, World! - from <b>App</b>
+        <router-view />
     </div> 
 </template> 
 

@@ -42,14 +42,12 @@
 
 <!-- Template Section ---------------------------------------------------------------------------------------------------------> 
 <template> 
-    <site-view 
+    <div
         component-type="subroot"
         component-name="mobile-subroot"
         ref="self"> 
-        <blank-layout> 
-            Hello, World! - from <b>mobile-subroot</b>#
-        </blank-layout>
-    </site-view> 
+        <slot />
+    </div> 
 </template> 
 
 <!-- Style Section ------------------------------------------------------------------------------------------------------------> 

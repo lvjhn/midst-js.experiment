@@ -14,9 +14,9 @@ export default {
     
     /** ===== ROUTING ===== */
     routing: {
-        prefix      : "app",
+        prefix      : "",
         prePrefix   : "",
-        root        : false 
+        root        : true 
     },
 
     /** ===== ROUTES ===== */

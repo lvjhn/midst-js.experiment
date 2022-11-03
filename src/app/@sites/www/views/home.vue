@@ -47,7 +47,7 @@
         component-name="home"
         ref="self"> 
         <blank-layout> 
-            Hello, World! - from <b>home</b>#
+            Hello, World! - from <b>home</b>
         </blank-layout>
     </site-view> 
 </template> 

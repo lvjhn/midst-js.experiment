@@ -71,7 +71,7 @@ class Routes
             for(let listItem of viewList) {
                 js += "\n\t{\n";
                 js += `\t\tpath: "${listItem.path}",\n`;
-                // js += `\t\tcomponent: () => import("^/midst.js")\n`;
+                js += `\t\tcomponent: () => import("../views${listItem.path}.vue")\n`;
                 js += "\t},";
             }
             js += "\n]";

@@ -47,7 +47,7 @@
         component-name="#{COMPONENT_NAME}#"
         ref="self"> 
         <blank-layout> 
-            Hello, World! - from <b>#{COMPONENT_NAME}</b>#
+            Hello, World! - from <b>#{COMPONENT_NAME}#</b>
         </blank-layout>
     </site-view> 
 </template> 

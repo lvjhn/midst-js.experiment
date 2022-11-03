@@ -42,14 +42,12 @@
 
 <!-- Template Section ---------------------------------------------------------------------------------------------------------> 
 <template> 
-    <site-view 
+    <div
         component-type="subroot"
         component-name="common-subroot"
         ref="self"> 
-        <blank-layout> 
-            Hello, World! - from <b>common-subroot</b>#
-        </blank-layout>
-    </site-view> 
+        <slot />
+    </div> 
 </template> 
 
 <!-- Style Section ------------------------------------------------------------------------------------------------------------> 

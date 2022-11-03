@@ -3,5 +3,5 @@
  * Central registration file for global components
  */
 export default async () => {
-
+  
 }

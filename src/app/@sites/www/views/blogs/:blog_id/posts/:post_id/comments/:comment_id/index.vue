@@ -47,7 +47,7 @@
         component-name="index"
         ref="self"> 
         <blank-layout> 
-            Hello, World! - from <b>#{COMPONENT_NAME}</b>#
+            Hello, World! - from <b>index</b>
         </blank-layout>
     </site-view> 
 </template> 

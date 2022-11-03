@@ -6,9 +6,9 @@ import fs from 'fs'
 
 class BaseResolver 
 {
-    constructor() 
+    constructor(rootDir) 
     {
-        this.rootPath = process.cwd()
+        this.rootPath = rootDir ?? process.cwd()
 
         this.context = {};
         this._aliases = [];
@@ -51,11 +51,12 @@ class BaseResolver
         const aliasResolve = {
             find: alias, 
             customResolver(importee, importer) {
-                
+
                 // fix alias marked as undefined
-                importee = importee.split("undefined/").join(alias + "/"); 
-                
                 self.context.alias = alias;
+                
+                importee = self.fixImportee(importee);
+                
                 self.context.importee = importee; 
                 self.context.importer = importer;
 
@@ -64,7 +65,7 @@ class BaseResolver
 
                 const finalPath =
                     self.finalizePath(prefinalPath);
-
+                    
                 self.checkExistence(finalPath);
 
                 return finalPath; 
@@ -102,6 +103,7 @@ class BaseResolver
             message += "Target File  : " + targetFile + "\n";
             message += "Importee     : " + importee + "\n";
             message += "Importer     : " + importer + "\n";
+            message += "Project      : " + this.rootPath + "\n";
 
             throw Error(message); 
         }
@@ -116,6 +118,7 @@ class BaseResolver
         
         finalPath = this.normalizeFolder(finalPath)
         finalPath = this.normalizeExtension(finalPath);
+        finalPath = this.normalizeRootPath(finalPath);
 
         return finalPath;
     }
@@ -142,11 +145,8 @@ class BaseResolver
     {
         let normPath; 
 
-        if(path.at(-1) == "/")
-            path = path + "/"
-
         if(fs.existsSync(path) && fs.lstatSync(path).isDirectory()) {
-            normPath = path + "index.js"
+            normPath = path + "/index.js"
         }
         else {
             normPath = path;
@@ -194,6 +194,24 @@ class BaseResolver
         const normImporter = importer.split(rootPath + "/").join("");
         return normImporter;
     }
+
+    /** 
+     * Fix importee (remove undefined/ part)
+     */
+    fixImportee(importee) 
+    {
+        const alias = this.context.alias; 
+        const tokens = importee.split(/^undefined/);
+
+        if(tokens[0] == "") {
+            tokens[0] = alias; 
+            const _importee = tokens.join("");
+            return _importee
+        }
+
+        return importee;
+    }
+
 
 }
 

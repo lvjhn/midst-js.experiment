@@ -4,12 +4,15 @@
  */
 import RootFolderResolver from "./resolvers/RootFolderResolver"
 import MidstFolderResolver from "./resolvers/MidstFolderResolver";
+import SourceFolderResolver from "./resolvers/SourceFolderResolver";
+import PublicFolderResolver from "./resolvers/PublicFolderResolver";
+import ModuleFolderResolver from "./resolvers/ModuleFolderResolver";
 
 class CustomAliases 
 {
-    constructor() 
+    constructor(rootDir) 
     {
-        this.rootDir = process.cwd() 
+        this.rootDir = rootDir ?? process.cwd() 
         this._resolvers = [];
 
         this.initResolvers();
@@ -33,7 +36,7 @@ class CustomAliases
     {
         this._resolvers = [
             ...this._resolvers, 
-            ...(new ResolverClass()).aliases()
+            ...(new ResolverClass(this.rootDir)).aliases()
         ];
     }
 
@@ -44,7 +47,10 @@ class CustomAliases
     {
         return [
             RootFolderResolver, 
-            MidstFolderResolver
+            MidstFolderResolver,
+            PublicFolderResolver,
+            SourceFolderResolver,
+            ModuleFolderResolver
         ]
     }   
 

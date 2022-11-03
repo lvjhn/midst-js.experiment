@@ -1,9 +1,0 @@
-{
-    "name": "index", 
-    "enabled": false,
-    "routing": {
-        "prefix": "",
-        "pre-prefix": "",
-        "root": false 
-    }
-}

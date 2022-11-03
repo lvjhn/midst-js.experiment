@@ -4,8 +4,9 @@
  */
 class ArgsParser 
 {
-    constructor() 
-    {
+    constructor(args) 
+    {   
+        this.args = args;
         this.context   = null; 
         this.command   = null;
         this.options   = []; 
@@ -27,8 +28,8 @@ class ArgsParser
      * Identifies the context from the arguments
      */
     identifyContext() 
-    {
-
+    {   
+        this.context = this.args[0];
     }
 
     /**
@@ -36,7 +37,7 @@ class ArgsParser
      */
     identifyCommand() 
     {
-
+        this.command = this.args[1];
     }
 
     /** 
@@ -44,7 +45,7 @@ class ArgsParser
      */
     identifyOptions() 
     {
-        
+        this.options = this.args.slice(2, this.identifyBoundary()); 
     }
 
     /**
@@ -52,6 +53,27 @@ class ArgsParser
      */
     identifyKwOptions()     
     {
+        const args = this.args.slice(this.identifyBoundary());  
+        const normArgs = {}; 
+        for(let arg of args) {
+            const tokens = arg.split("="); 
+            normArgs[tokens[0].substring(2)] = tokens[1]; 
+        }
+        this.kwOptions = normArgs; 
+    }
 
+    /**
+     * Identifies the boundary between options and kw-options
+     */
+    identifyBoundary() 
+    {
+        for(let i = 0; i < this.args.length; i++) {
+            if(this.args[i].length >= 2 && this.args[i].substring(0, 2) == "--") {
+                return i;
+            }
+        }
+        return this.args.length;
     }
 }
+
+export default ArgsParser;

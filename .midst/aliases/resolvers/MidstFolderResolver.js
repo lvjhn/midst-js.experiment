@@ -22,11 +22,11 @@ class MidstFolderResolver extends BaseResolver
         const importeeTail = this.importeeTail(); 
         const importerTail = this.importerTail();
 
-        const dirSandwitch = 
-            (folder) => rootPath + folder + importeeTail;
+        const dirPath = 
+            (folder) => folder + importeeTail;
 
         const pathMap = {
-            '&midst:' : () => dirSandwitch('/.midst')
+            '&midst:' : () => dirPath('/.midst')
         }
 
         const prePath = pathMap[alias](); 

@@ -1,0 +1,60 @@
+{
+  "id": "untitled-app",
+  "name": "Untitled App",
+  "short_name": "Untitled App",
+  "description": "Demo starter for VFLB template.",
+
+  "start_url": "/?source=pwa",
+  "display": "standalone",
+  "scope": "/",
+  "related_applications": [{
+    "platform": "webapp",
+    "url": "/manifest.json"
+  }],
+
+  "background_color": "#3367D6",
+  "theme_color": "#3367D6",
+
+  "icons": [
+    {
+      "src": "/resources/icons/app-icon.16x16.png",
+      "type": "image/png",
+      "sizes": "16x16"
+    },
+    {
+      "src": "/resources/icons/app-icon.32x32.png",
+      "type": "image/png",
+      "sizes": "32x32"
+    },
+    {
+      "src": "/resources/icons/app-icon.64x64.png",
+      "type": "image/png",
+      "sizes": "64x64"
+    },
+    {
+      "src": "/resources/icons/app-icon.128x128.png",
+      "type": "image/png",
+      "sizes": "128x128"
+    },
+    {
+      "src": "/resources/icons/app-icon.192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/resources/icons/app-icon.256x256.png",
+      "type": "image/png",
+      "sizes": "256x256"
+    },
+    {
+      "src": "/resources/icons/app-icon.512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "/resources/icons/app-icon.1024x1024.png",
+      "type": "image/png",
+      "sizes": "1024x1024"
+    }
+  ]
+}

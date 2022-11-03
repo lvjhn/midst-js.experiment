@@ -4,11 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --force",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
+    "colors": "^1.4.0",
+    "fs-extra": "^10.1.0",
     "vue": "^3.2.41"
   },
   "devDependencies": {

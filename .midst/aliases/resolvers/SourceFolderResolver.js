@@ -12,9 +12,16 @@ class SourceFolderResolver extends BaseResolver
     defineAliases() {
         return [
             '@',
-            '@app:',
-            '@assets:',
-            '@scripts:'
+            '@app:',         
+            '@assets:',     
+            '@config',      
+            '@libraries',    
+            '@registries',  
+            '@settings',     
+            '@scripts:',   
+            '@start:',    
+            '@helpers:',    
+            '@facades:'  
         ];
     }
     
@@ -27,21 +34,21 @@ class SourceFolderResolver extends BaseResolver
         const importeeTail = this.importeeTail(); 
         const importerTail = this.importerTail();
 
-        const dirSandwitch = 
-            (folder) => rootPath + folder + importeeTail;
+        const dirPath = 
+            (folder) => folder + importeeTail;
 
         const pathMap = {
-            '@'             : () => dirSandwitch('/src'),
-            '@app:'         : () => dirSandwitch('/src/app'),
-            '@assets:'      : () => dirSandwitch('/src/assets'), 
-            '@config'       : () => dirSandwitch('/src/config'),
-            '@libraries'    : () => dirSandwitch('/src/config/libraries'),
-            '@registries'   : () => dirSandwitch('/src/config/registries'),
-            '@settings'     : () => dirSandwitch('/src/config/settings'),
-            '@scripts:'     : () => dirSandwitch('/src/scripts'), 
-            '@start:'       : () => dirSandwitch('/src/start'), 
-            '@helpers:'     : () => dirSandwitch('/src/start/helpers'),
-            '@facades:'     : () => dirSandwitch('/src/start/facades')
+            '@'             : () => dirPath('/src/'),
+            '@app:'         : () => dirPath('/src/app/'),
+            '@assets:'      : () => dirPath('/src/assets/'), 
+            '@config'       : () => dirPath('/src/config/'),
+            '@libraries'    : () => dirPath('/src/config/libraries/'),
+            '@registries'   : () => dirPath('/src/config/registries/'),
+            '@settings'     : () => dirPath('/src/config/settings/'),
+            '@scripts:'     : () => dirPath('/src/scripts/'), 
+            '@start:'       : () => dirPath('/src/start/'), 
+            '@helpers:'     : () => dirPath('/src/start/helpers/'),
+            '@facades:'     : () => dirPath('/src/start/facades/')
         }
 
         const prePath = pathMap[alias](); 

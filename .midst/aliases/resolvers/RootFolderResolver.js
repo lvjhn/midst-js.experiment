@@ -6,6 +6,9 @@ import BaseResolver from "../BaseResolver"
 
 class RootFolderResolver extends BaseResolver
 {   
+    /**
+     * Define aliases for the resolver.
+     */
     defineAliases() {
         return [
             "^", 
@@ -14,23 +17,26 @@ class RootFolderResolver extends BaseResolver
             "^src:", 
             "^temp:" 
         ];
-    }
+    }   
 
+    /**
+     * Define resolver function.
+     */
     defineResolver(alias, importee, importer) {
         
         const rootPath = this.rootPath;
         const importeeTail = this.importeeTail(); 
         const importerTail = this.importerTail();
 
-        const dirSandwitch = 
-            (folder) => rootPath + folder + importeeTail;
+        const dirPath = 
+            (folder) => folder + importeeTail;
 
         const pathMap = {
-            '^'         : () => dirSandwitch('/'), 
-            '^midst:'   : () => dirSandwitch('/.midst/'), 
-            '^public:'  : () => dirSandwitch('/public/'),
-            '^src:'     : () => dirSandwitch('/src'), 
-            '^temp:'    : () => dirSandwitch('/temp/')
+            '^'         : () => dirPath('/'), 
+            '^midst:'   : () => dirPath('/.midst/'), 
+            '^public:'  : () => dirPath('/public/'),
+            '^src:'     : () => dirPath('/src'), 
+            '^temp:'    : () => dirPath('/temp/')
         }
 
         const prePath = pathMap[alias](); 

@@ -13,7 +13,7 @@ export default defineConfig({
   /** Dependency Pre-bundling */
   optimizeDeps: {
     include: [
-
+      "@/app"
     ]
   },
 

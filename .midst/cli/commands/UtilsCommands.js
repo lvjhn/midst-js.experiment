@@ -34,6 +34,8 @@ class UtilsCommands
             await this.scanModules();
         else if(command == "scan:routes")   
             await this.scanRoutes();
+        else if(command == "scan:main")   
+            await this.scanMain();
 
         else if(command == "create:library")
             await this.createLibrary(); 
@@ -69,6 +71,16 @@ class UtilsCommands
     {
         console.log("@ Scanning routes.");
         await Routes.scan();
+        console.log(colors.green("@ Done."));
+    }
+
+    /**
+     * Scan modules for main files and update @start://runtime/main.map.js
+     */
+    async scanMain() 
+    {
+        console.log("@ Scanning main files.");
+        await Modules.scanMain();
         console.log(colors.green("@ Done."));
     }
 

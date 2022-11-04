@@ -8,6 +8,8 @@ import colors from 'colors'
 
 import Modules from '../utils/modules/Modules.js'
 
+import { execSync } from "child_process";
+
 class ModuleScaffolder
 {
     /**
@@ -57,6 +59,12 @@ class ModuleScaffolder
 
         for(let inject in injects) 
             indexFileContent = indexFileContent.replaceAll(inject, injects[inject]); 
+        
+        /** ----- Create home.vue for mobile and www ----- */
+        console.log("@ Creating home view for mobile and www")
+        for(let site of ["www", "mobile"]) {
+            execSync(`node midst ${moduleId} create:view ${site} home`);
+        }
         
         fs.writeFileSync(indexFile, indexFileContent);
     }

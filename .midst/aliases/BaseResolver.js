@@ -119,8 +119,17 @@ class BaseResolver
         finalPath = this.normalizeRootPath(finalPath);
         finalPath = this.normalizeFolder(finalPath)
         finalPath = this.normalizeExtension(finalPath);
+        finalPath = this.normalizeSlashes(finalPath);
 
         return finalPath;
+    }
+
+    /** 
+     * Apply Slash Normalization
+     */
+    normalizeSlashes(prefinalPath) 
+    {
+        return prefinalPath.replaceAll(/\/+/g, "/");
     }
 
     /** 

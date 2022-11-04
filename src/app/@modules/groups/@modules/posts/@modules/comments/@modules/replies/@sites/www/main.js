@@ -1,4 +1,4 @@
 /** ----- SITE MAIN FILE ----- */
-export default {
+export default async () => {
 
 }

@@ -15,13 +15,16 @@ class SourceFolderResolver extends BaseResolver
             '@app:',         
             '@assets:',     
             '@config:',      
+            '@core:',
             '@libraries:',    
             '@registries:',  
             '@settings:',     
             '@scripts:',   
             '@start:',    
             '@helpers:',    
-            '@facades:'  
+            '@facades:', 
+            '@runtime:', 
+            '@utils:'
         ];
     }
     
@@ -38,17 +41,20 @@ class SourceFolderResolver extends BaseResolver
             (folder) => folder + importeeTail;
 
         const pathMap = {
-            '@'             : () => dirPath('/src/'),
-            '@app:'         : () => dirPath('/src/app'),
-            '@assets:'      : () => dirPath('/src/assets'), 
+            '@'              : () => dirPath('/src/'),
+            '@app:'          : () => dirPath('/src/app'),
+            '@assets:'       : () => dirPath('/src/assets'), 
             '@config:'       : () => dirPath('/src/config'),
             '@libraries:'    : () => dirPath('/src/config/libraries'),
             '@registries:'   : () => dirPath('/src/config/registries'),
             '@settings:'     : () => dirPath('/src/config/settings'),
-            '@scripts:'     : () => dirPath('/src/scripts'), 
-            '@start:'       : () => dirPath('/src/start'), 
-            '@helpers:'     : () => dirPath('/src/start/helpers'),
-            '@facades:'     : () => dirPath('/src/start/facades')
+            '@core:'         : () => dirPath("/src/core"),
+            '@scripts:'      : () => dirPath('/src/scripts'), 
+            '@start:'        : () => dirPath('/src/start'), 
+            '@helpers:'      : () => dirPath('/src/start/helpers'),
+            '@facades:'      : () => dirPath('/src/start/facades'),
+            '@runtime:'      : () => dirPath('/src/start/runtime'),
+            '@utils:'        : () => dirPath('/src/start/utils')
         }
 
         const prePath = pathMap[alias](); 

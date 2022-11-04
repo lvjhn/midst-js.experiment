@@ -40,6 +40,7 @@ class AppLoader
         await this.applyRedirects();
         await this.loadModuleRoot(); 
         await this.loadRouteList();
+        await this.loadMainMap();
         await this.loadManifestData(); 
         await this.createInstance(); 
         await this.loadLibraries();
@@ -48,10 +49,21 @@ class AppLoader
     }
 
     /** 
+     * Load Main Map
+     */
+    async loadMainMap() 
+    {
+        console.log("# App. Loader: Loading main map..."); 
+        $app.modules.MAIN_MAP = 
+            (await import("@start://runtime/main.map")).default;
+    }
+
+    /** 
      * Apply Redirects
      */
     async applyRedirects() 
     {
+        console.log("# App. Loader: Applying redirects...");
         const $locHelper = LocationHelper.instance();
         
         if($locHelper.shouldRedirectToMobileSite()) {

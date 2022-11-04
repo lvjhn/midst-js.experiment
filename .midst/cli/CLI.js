@@ -26,7 +26,6 @@ class CLI
         await this.checkArgs(); 
         await this.parseArgs();
         await this.parseRoutes();
-        await this.route();
         await this.handleRestart();
     }
 
@@ -41,6 +40,10 @@ class CLI
             console.log("@ Scanning modules.")
             execSync('node midst utils scan:modules');
             console.log("@ Scanning routes.")
+            execSync('node midst utils scan:routes');
+            console.log("@ Scanning main files.")
+            execSync('node midst utils scan:main');
+            console.log("@ Restarting dev server.");
             execSync('node midst utils scan:routes');
             console.log("@ Restarting dev server.");
             execSync('touch vite.config.js');
@@ -84,11 +87,6 @@ class CLI
             await (new UtilsCommands(this)).handle(); 
         else if(context.split(".")[0] == "app") 
             await (new ModuleCommands(this)).handle();
-
-    }
-
-    async route() 
-    {
 
     }
 } 

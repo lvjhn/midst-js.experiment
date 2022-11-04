@@ -1,6 +1,6 @@
 <!--
    | COMPONENT FILE
-   | Type: mobile-view
+   | Type: www-view
    | Name: home
   --> 
 
@@ -8,6 +8,7 @@
 <script setup> 
     /** ===== Imports =============== */
     import { ref, computed, watch, onMounted, getCurrentInstance } from 'vue' 
+    import register from "#site://.site/register"
     import { useWindowSize } from 'vue-window-size'
 
     /** ===== Set-up =============== */
@@ -22,10 +23,25 @@
     // const baz = computed(() => foo.value + bar.value); 
 
     /** ===== Lifecycle =============== */
-    onMounted(() => {
+    onMounted(async () => {
         const refs = instance.refs; 
-        resizeTrait();
+
+        await reloadContext();
+
+        /** ----------------------- */
+
+        // custom code //
+
+        /** ----------------------- */
     })
+
+    async function reloadContext() 
+    {
+        await register();
+        await $app.site.runModMains();
+        await $app.site.main(); 
+        resizeTrait();
+    }
 
     function resizeTrait() {
         handleResize(); 
@@ -43,7 +59,7 @@
 <!-- Template Section ---------------------------------------------------------------------------------------------------------> 
 <template> 
     <site-view 
-        component-type="mobile-view"
+        component-type="www-view"
         component-name="home"
         ref="self"> 
         <blank-layout> 

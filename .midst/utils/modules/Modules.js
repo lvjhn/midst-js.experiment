@@ -129,7 +129,49 @@ class Modules
         }
         
         scanModule("app");
+        
     }
+    
+    /**
+     * Scan for main files, updating the runtime://main.map.js file.
+     */
+    static scanMain() 
+    {
+        let mainMap = {};
+
+        async function scanModule(moduleId, prefixBuffer) 
+        {
+            const modPath = Modules.path(moduleId);
+            const mainFile = modPath + "/main.js"; 
+
+            mainMap[moduleId] = "^/" + modPath + "/main.js";
+
+            const submodules = Modules.submodules(moduleId);
+
+            for(let submoduleId of submodules) {
+                scanModule(moduleId + "." + submoduleId);
+            }
+        }
+
+        async function writeMainMap() 
+        {
+            let js = ""; 
+        
+            js += "\nexport default \n{\n"
+            for(let moduleId in mainMap) {
+                js += `    "${moduleId}" : () => import("${mainMap[moduleId]}"),\n`
+            }
+
+            js += "}"
+
+            fs.writeFileSync("./src/start/runtime/main.map.js", js);
+        }
+
+        scanModule("app", "");
+        writeMainMap();
+
+    }
+
 }
 
 export default Modules; 

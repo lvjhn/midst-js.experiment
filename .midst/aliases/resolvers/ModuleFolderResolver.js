@@ -123,10 +123,9 @@ class ModuleFolderResolver extends BaseResolver
         const modulePath = Modules.path(moduleId); 
         const sitesPath = modulePath + "/@sites"; 
 
-        let tail = importerTail.split(modulePath).join("");
-        tail = tail.substring("/@sites".length); 
-        
-        const prefinalPath = sitesPath + tail; 
+        let tail = importeeTail;
+        let site = importerTail.split(modulePath + "/@sites")[1].split("/")[1]; 
+        const prefinalPath = sitesPath + "/" + site + "/" + tail; 
         
         return prefinalPath;
     }
@@ -146,8 +145,7 @@ class ModuleFolderResolver extends BaseResolver
         const modulePath = Modules.path(moduleId); 
         const sitesPath = modulePath + "/@sites"; 
 
-        let tail = importerTail.split(modulePath).join("");
-        tail = tail.split("/").slice(3).join("");
+        let tail = importeeTail;
         
         const prefinalPath = sitesPath + "/" + site + "/" + tail; 
         

@@ -6,6 +6,7 @@ import CommonCustomRoutes from './@sites/common/routes'
 import CommonAutoRoutes from './@sites/common/routes/_auto'
 
 import ModList from "./_modules"
+import Main from "./main"
 
 export default {
     
@@ -36,5 +37,8 @@ export default {
     },
 
     /** ===== MODULES ===== */
-    modules: ModList
+    modules: ModList,
+
+    /** ===== MAIN FILE ===== */
+    main: Main
 }

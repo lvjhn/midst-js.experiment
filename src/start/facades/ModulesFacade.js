@@ -51,6 +51,25 @@ class ModulesFacade
 
         return { forward, backward }
     }
+
+    static async modMainChain() 
+    {
+        const modIdx = $app.site.moduleIdx; 
+        const moduleId = $app.modules.ID_MAP[modIdx]; 
+
+        const tokens = moduleId.split("."); 
+        const chain = [] 
+        let buffer = "";
+
+        for(let token of tokens) {
+            buffer += token; 
+            const mainFn = (await $app.modules.MAIN_MAP[buffer]()).default;
+            chain.push(mainFn);
+            buffer += "."
+        }
+
+        return chain;
+    }
 }
 
 export default ModulesFacade;

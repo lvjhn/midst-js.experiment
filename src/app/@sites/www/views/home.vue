@@ -7,12 +7,11 @@
 <!-- Script Section ----------------------------------------------------------------------------------------------------------->
 <script setup> 
     /** ===== Imports =============== */
-    import { ref, computed, watch, onMounted, getCurrentInstance } from 'vue' 
+    import { ref, computed, watch, onMounted, getCurrentInstance, onBeforeMount } from 'vue' 
     import registerSite from "#site://.site/register"
     import RuntimeFacade from '@facades://RuntimeFacade'
     import SiteView from '@start://prefabs/views/www-view.vue'
     import { useWindowSize } from 'vue-window-size'
-
 
     /** ===== Set-up =============== */
     const instance = getCurrentInstance(); 
@@ -26,6 +25,12 @@
     // const baz = computed(() => foo.value + bar.value); 
 
     /** ===== Lifecycle =============== */
+    
+
+    onBeforeMount(async () => {
+        await initRuntime(); 
+    }) 
+
     onMounted(async () => {
         const refs = instance.refs; 
 
@@ -37,6 +42,11 @@
 
         /** ----------------------- */
     })
+
+    async function initRuntime() 
+    {
+        await registerSite();
+    }
 
     async function reloadContext() 
     {

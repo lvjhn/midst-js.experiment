@@ -45,8 +45,10 @@
     <div
         component-type="module-subroot"
         component-name="mobile-subroot"
-        ref="self"> 
+        ref="self">
+        Hello, from account module!
         <slot />
+        Hello again, from account module!
     </div> 
 </template> 
 

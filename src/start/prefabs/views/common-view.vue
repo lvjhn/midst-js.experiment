@@ -51,6 +51,7 @@
         component-type="common-view"
         component-name="common-view"
         ref="self"> 
+        <component :is="subroot[0]" component-name="hi" />
         <slot />
     </div> 
 </template> 

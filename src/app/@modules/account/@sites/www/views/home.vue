@@ -66,7 +66,9 @@
         component-name="home"
         ref="self"> 
         <root-layout> 
+            <br />
             Hello, World! - from <b>home</b>
+            <br />
         </root-layout>
     </site-view> 
 </template> 

@@ -12,6 +12,8 @@
     import RuntimeFacade from '@facades://RuntimeFacade'
     import _ from 'lodash'
 
+    import subroot from "../components/subroot.vue"
+
     /** ===== Set-up =============== */
     const instance = getCurrentInstance(); 
     const props = defineProps([]); 
@@ -20,13 +22,10 @@
 
     /** ===== Data =============== */
     const subroots = shallowRef([]);
-
-    RuntimeFacade.onRegister(async () => {
-        const _subroots_ = RuntimeFacade.subrootChain();
-        alert(5);
-        for(let subroot of _subroots_) 
-            subroots.push(defineAsyncComponent(subroot)); 
-    });
+    
+    const _subroots_ = RuntimeFacade.subrootChain();
+    for(let subroot of _subroots_) 
+        subroots.value.push(defineAsyncComponent(subroot)); 
 
     /** ===== Lifecycle =============== */
     onMounted(() => {
@@ -49,13 +48,14 @@
 
 <!-- Template Section ---------------------------------------------------------------------------------------------------------> 
 <template> 
-    <div 
-        component-type="root-layout"
-        component-name="root-layout"
-        ref="self"> 
-        {{subroots}}
+    <subroot 
+        component-type="subroot"
+        :component-name="subroots[0] + '-layout'"
+        :subroots="subroots"
+        :view="getCurrentInstance()"
+        ref="self">
         <slot />
-    </div> 
+    </subroot> 
 </template> 
 
 <!-- Style Section ------------------------------------------------------------------------------------------------------------> 

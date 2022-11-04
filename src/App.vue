@@ -9,6 +9,7 @@
     /** ===== Imports =============== */
     import { ref, computed, watch, onMounted, getCurrentInstance, defineAsyncComponent } from 'vue' 
     import { useWindowSize } from 'vue-window-size'
+    import RuntimeFacade from '@facades://RuntimeFacade'
     import _ from 'lodash'
 
     /** ===== Set-up =============== */
@@ -24,6 +25,7 @@
 
 
     /** ===== Lifecycle =============== */
+
     onMounted(() => {
         const refs = instance.refs; 
         resizeTrait();
@@ -48,6 +50,7 @@
         component-type="app-root"
         component-name="App"
         ref="self"> 
+        Hello, from App!
         <router-view />
     </div> 
 </template> 

@@ -46,7 +46,9 @@
         component-type="module-subroot"
         component-name="mobile-subroot"
         ref="self"> 
-        <slot />
+        Hello, from app module!
+        <slot /> 
+        Hello again, from app module!
     </div> 
 </template> 
 

@@ -8,8 +8,6 @@ import CommonAutoRoutes from './@sites/common/routes/_auto'
 import ModList from "./_modules"
 import Main from "./main"
 
-alert("Hello from account module 2");
-
 export default {
     
     /** ===== MODULE INFO ===== */ 

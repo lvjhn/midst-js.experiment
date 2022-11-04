@@ -6,7 +6,6 @@ import viteCompression from 'vite-plugin-compression';
 
 import CustomAliases from "./.midst/aliases/CustomAliases.js"
 
-import reprebundlingPlugin from './.midst/utils/reprebundling/reprebundling.js';
 
 export default defineConfig({
   
@@ -16,7 +15,6 @@ export default defineConfig({
     VitePWA(pwaConfig),
     viteCompression(),
     splitVendorChunkPlugin(),
-    reprebundlingPlugin()
   ],
 
   /** Environment File Prefix */

@@ -2,7 +2,8 @@
  * RUNTIME FACADE 
  * Facade functions for runtime context.
  */
-$app.runtime.onRegisterHooks = [];
+if(!$app.runtime.onRegisterHooks)
+    $app.runtime.onRegisterHooks = [];
 
 class RuntimeFacade     
 {   
@@ -77,7 +78,7 @@ class RuntimeFacade
      * Common runtime registration function for a current route
      */
     static async commonRegistration () {
-        
+
         const route = $app.libraries.router.currentRoute._value;
         
         $app.runtime.route = route;

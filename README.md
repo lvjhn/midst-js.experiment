@@ -1,3 +1,3 @@
 # MIDST-JS 
 A customized Vue3 template for structuring apps modularly.
-[More documentation coming soon]
+This version is the initial version used to test feasibility of the ideas.

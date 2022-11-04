@@ -34,8 +34,10 @@ class UtilsCommands
             await this.scanModules();
         else if(command == "scan:routes")   
             await this.scanRoutes();
-        else if(command == "scan:main")   
-            await this.scanMain();
+        else if(command == "scan:mains")   
+            await this.scanMains();
+        else if(command == "scan:subroots")   
+            await this.scanSubroots();
 
         else if(command == "create:library")
             await this.createLibrary(); 
@@ -75,12 +77,22 @@ class UtilsCommands
     }
 
     /**
+     * Scan modules for subroot files and update @start://runtime/subroot.map.js
+     */
+    async scanSubroots() 
+    {
+        console.log("@ Scanning subroot files.");
+        await Modules.scanSubroots();
+        console.log(colors.green("@ Done."));
+    }
+
+    /**
      * Scan modules for main files and update @start://runtime/main.map.js
      */
-    async scanMain() 
+    async scanMains() 
     {
         console.log("@ Scanning main files.");
-        await Modules.scanMain();
+        await Modules.scanMains();
         console.log(colors.green("@ Done."));
     }
 

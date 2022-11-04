@@ -42,9 +42,9 @@ class CLI
             console.log("@ Scanning routes.")
             execSync('node midst utils scan:routes');
             console.log("@ Scanning main files.")
-            execSync('node midst utils scan:main');
-            console.log("@ Restarting dev server.");
-            execSync('node midst utils scan:routes');
+            execSync('node midst utils scan:mains');
+            console.log("@ Scanning subroot files.");
+            execSync('node midst utils scan:subroots');
             console.log("@ Restarting dev server.");
             execSync('touch vite.config.js');
             console.log(colors.green("@ Done."))

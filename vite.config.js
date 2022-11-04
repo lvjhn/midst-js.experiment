@@ -1,10 +1,12 @@
-import { defineConfig, splitVendorChunkPlugin } from 'vite'
+import { defineConfig, splitVendorChunkPlugin, transformWithEsbuild } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { VitePWA } from "vite-plugin-pwa"
-import pwaConfig from './pwa.config'
+import pwaConfig from './pwa.config.js'
 import viteCompression from 'vite-plugin-compression';
 
 import CustomAliases from "./.midst/aliases/CustomAliases.js"
+
+import reprebundlingPlugin from './.midst/utils/reprebundling/reprebundling.js';
 
 export default defineConfig({
   
@@ -14,6 +16,7 @@ export default defineConfig({
     VitePWA(pwaConfig),
     viteCompression(),
     splitVendorChunkPlugin(),
+    reprebundlingPlugin()
   ],
 
   /** Environment File Prefix */
@@ -22,7 +25,7 @@ export default defineConfig({
   /** Custom Aliases */
   resolve: {
     alias: [
-      ...(new CustomAliases()).resolvers()
+      ...(new CustomAliases()).resolvers(),
     ]
   },
 

@@ -135,7 +135,7 @@ class Modules
     /**
      * Scan for main files, updating the runtime://main.map.js file.
      */
-    static scanMain() 
+    static scanMains() 
     {
         let mainMap = {};
 
@@ -144,7 +144,7 @@ class Modules
             const modPath = Modules.path(moduleId);
             const mainFile = modPath + "/main.js"; 
 
-            mainMap[moduleId] = "^/" + modPath + "/main.js";
+            mainMap[moduleId] = "^/" + mainFile;
 
             const submodules = Modules.submodules(moduleId);
 
@@ -164,12 +164,51 @@ class Modules
 
             js += "}"
 
-            fs.writeFileSync("./src/start/runtime/main.map.js", js);
+            fs.writeFileSync("./src/start/maps/main.map.js", js);
         }
 
         scanModule("app", "");
         writeMainMap();
 
+    }
+
+    /**
+     * Scan for subroot files, updating the runtime://subroot.map.js file.
+     */
+    static scanSubroots() 
+    {
+        let subrootMap = {};
+
+        async function scanModule(moduleId, prefixBuffer) 
+        {
+            const modPath = Modules.path(moduleId);
+            const subrootFile = modPath + "/subroot.vue"; 
+
+            subrootMap[moduleId] = "^/" + subrootFile;
+
+            const submodules = Modules.submodules(moduleId);
+
+            for(let submoduleId of submodules) {
+                scanModule(moduleId + "." + submoduleId);
+            }
+        }
+
+        async function writeSubrootMap() 
+        {
+            let js = ""; 
+        
+            js += "\nexport default \n{\n"
+            for(let moduleId in subrootMap) {
+                js += `    "${moduleId}" : () => import("${subrootMap[moduleId]}"),\n`
+            }
+
+            js += "}"
+
+            fs.writeFileSync("./src/start/maps/subroot.map.js", js);
+        }
+
+        scanModule("app", "");
+        writeSubrootMap();
     }
 
 }

@@ -1,15 +1,14 @@
 <!--
    | COMPONENT FILE
-   | Type: root
+   | Type: app-root
    | Name: App
   --> 
 
 <!-- Script Section ----------------------------------------------------------------------------------------------------------->
 <script setup> 
     /** ===== Imports =============== */
-    import { ref, computed, watch, onMounted, getCurrentInstance } from 'vue' 
+    import { ref, computed, watch, onMounted, getCurrentInstance, defineAsyncComponent } from 'vue' 
     import { useWindowSize } from 'vue-window-size'
-    import RuntimeFacade from '@facades://RuntimeFacade'
     import _ from 'lodash'
 
     /** ===== Set-up =============== */
@@ -23,9 +22,6 @@
     // const bar = ref("world!"); 
     // const baz = computed(() => foo.value + bar.value); 
 
-    RuntimeFacade.onRegister(async () => {
-        
-    })
 
     /** ===== Lifecycle =============== */
     onMounted(() => {
@@ -49,7 +45,7 @@
 <!-- Template Section ---------------------------------------------------------------------------------------------------------> 
 <template> 
     <div 
-        component-type="root"
+        component-type="app-root"
         component-name="App"
         ref="self"> 
         <router-view />

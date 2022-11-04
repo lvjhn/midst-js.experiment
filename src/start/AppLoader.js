@@ -5,9 +5,10 @@
 import Axios from 'axios'
 
 /** Load Global & App Add Ons */
-import "&midst://scripts/global-add-ons"
+import "&midst://runtime/global-add-ons"
 import "@start://runtime/app-add-ons"
 
+/** ===== THESE REGISTRIES NEED TO BE LOADED BEFORE APP LOADER ===== */
 /** Load Settings */
 import "@registries://settings"
 
@@ -38,12 +39,13 @@ class AppLoader
     async initApp() 
     {
         await this.applyRedirects();
+        await this.loadManifestData(); 
         await this.loadModuleRoot(); 
         await this.loadRouteList();
         await this.loadMainMap();
-        await this.loadManifestData(); 
+        await this.loadSubrootMap();
         await this.createInstance(); 
-        await this.loadLibraries();
+        await this.loadRegistries();
         await this.setTitle();
         await this.mountInstance(); 
     }
@@ -55,7 +57,35 @@ class AppLoader
     {
         console.log("# App. Loader: Loading main map..."); 
         $app.modules.MAIN_MAP = 
-            (await import("@start://runtime/main.map")).default;
+            (await import("@start://maps/main.map")).default;
+    }
+
+    /** 
+     * Load Registries
+     */
+    async loadRegistries() 
+    {
+        console.log("# App. Loader: Loading registries..."); 
+
+        try {
+            await (await import("@registries://routes")).default(); 
+            await (await import("@registries://components")).default(); 
+            await (await import("@registries://layouts")).default();
+            await (await import("@registries://pwa")).default(); 
+            await (await import("@registries://libraries")).default(); 
+        } catch(e) {
+            console.error(e);
+        }
+    }
+
+    /** 
+     * Load Subroot Map
+     */
+    async loadSubrootMap() 
+    {
+        console.log("# App. Loader: Loading main map..."); 
+        $app.modules.SUBROOT_MAP = 
+            (await import("@start://maps/subroot.map")).default;
     }
 
     /** 
@@ -123,16 +153,7 @@ class AppLoader
         $app.routes.ROUTE_PREFIX_MAP = $app.facades.Routes.routePrefixes(); 
         $app.routes.ROUTE_LIST = $app.facades.Routes.routeList(); 
     }
-     
-    /**
-     * Load Libraries
-     */
-    async loadLibraries() 
-    {
-        console.log("# App. Loader: Loading libraries...");
-        const loadLibraries = (await import("@registries://libraries")).default;
-        await loadLibraries();
-    } 
+  
 
     /**
      * Set Initial Title

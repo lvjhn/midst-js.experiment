@@ -10,7 +10,9 @@
     import { ref, computed, watch, onMounted, getCurrentInstance } from 'vue' 
     import registerSite from "#site://.site/register"
     import RuntimeFacade from '@facades://RuntimeFacade'
+    import SiteView from '@start://prefabs/views/#{SITE_NAME}#-view.vue'
     import { useWindowSize } from 'vue-window-size'
+
 
     /** ===== Set-up =============== */
     const instance = getCurrentInstance(); 
@@ -63,9 +65,9 @@
         component-type="#{SITE_NAME}#-view"
         component-name="#{COMPONENT_NAME}#"
         ref="self"> 
-        <blank-layout> 
+        <root-layout> 
             Hello, World! - from <b>#{COMPONENT_NAME}#</b>
-        </blank-layout>
+        </root-layout>
     </site-view> 
 </template> 
 

@@ -1,6 +1,6 @@
 <!--
    | COMPONENT FILE
-   | Type: subroot
+   | Type: site-subroot
    | Name: common-subroot
   --> 
 
@@ -43,7 +43,7 @@
 <!-- Template Section ---------------------------------------------------------------------------------------------------------> 
 <template> 
     <div
-        component-type="subroot"
+        component-type="site-subroot"
         component-name="common-subroot"
         ref="self"> 
         <slot />

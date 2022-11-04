@@ -9,7 +9,7 @@ console.log("# App. Loader :: Library Registry : Loading libraries...");
 const regFns = []; 
 
 const register = (name, regFn) => {
-    console.log(`# App. Loader :: Helpers Registry : Registering library ${name}.`)
+    console.log(`# App. Loader :: Library Registry : Registering library ${name}.`)
     $app.registry.registerLibrary(name, regFn);
 };
 

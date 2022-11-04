@@ -43,7 +43,7 @@
 <!-- Template Section ---------------------------------------------------------------------------------------------------------> 
 <template> 
     <div 
-        component-type="subroot"
+        component-type="site-subroot"
         component-name="www-subroot"
         ref="self"> 
         <slot />

@@ -4,9 +4,9 @@
  */
 import Axios from 'axios'
 
-import LocationHelper from "@helpers://LocationHelper"
-
+/** Load Global & App Add Ons */
 import "&midst://scripts/global-add-ons"
+import "@start://runtime/app-add-ons"
 
 /** Load Settings */
 import "@registries://settings"
@@ -64,7 +64,7 @@ class AppLoader
     async applyRedirects() 
     {
         console.log("# App. Loader: Applying redirects...");
-        const $locHelper = LocationHelper.instance();
+        const $locHelper = $app.helpers.Location.instance();
         
         if($locHelper.shouldRedirectToMobileSite()) {
             window.location = $locHelper.mobileSiteLocation();
@@ -108,12 +108,11 @@ class AppLoader
     {
         console.log("# App. Loader: Loading module root...");
         $app.modules.ROOT = (await import("@/app/index.js")).default; 
-        const modMaps = $app.facades.ModulesFacade.modMaps(); 
+        const modMaps = $app.facades.Modules.modMaps(); 
         $app.modules.INDEX_MAP = modMaps.indexMap; 
         $app.modules.IDX_MAP = modMaps.idMaps.forward;
         $app.modules.ID_MAP = modMaps.idMaps.backward;
     }
-
 
     /** 
      * Load Route List
@@ -121,8 +120,8 @@ class AppLoader
     async loadRouteList() 
     {
         console.log("# App. Loader: Loading route list...");
-        $app.routes.ROUTE_PREFIX_MAP = $app.facades.RoutesFacade.routePrefixes(); 
-        $app.routes.ROUTE_LIST = $app.facades.RoutesFacade.routeList(); 
+        $app.routes.ROUTE_PREFIX_MAP = $app.facades.Routes.routePrefixes(); 
+        $app.routes.ROUTE_LIST = $app.facades.Routes.routeList(); 
     }
      
     /**

@@ -1,8 +1,12 @@
 /** 
- * Modules Facade
+ * MODULES FACADE
+ * Facade functons for module context.
  */
 class ModulesFacade
-{
+{   
+    /** 
+     * Get the module mappings (indexMap and idMaps)
+     */
     static modMaps() 
     {
         const ROOT = $app.modules.ROOT; 
@@ -13,6 +17,9 @@ class ModulesFacade
         return { indexMap, idMaps };
     }
     
+    /** 
+     * Scans a base module index for indexes
+     */
     static scanBase(base, prefix, _idx) 
     {   
         let map = {};
@@ -38,6 +45,9 @@ class ModulesFacade
         return map;
     }
 
+    /**
+     * Creates ID maps for an index map.
+     */
     static idMaps(indexMap) 
     {
         const forward  = {};
@@ -50,25 +60,6 @@ class ModulesFacade
         }
 
         return { forward, backward }
-    }
-
-    static async modMainChain() 
-    {
-        const modIdx = $app.site.moduleIdx; 
-        const moduleId = $app.modules.ID_MAP[modIdx]; 
-
-        const tokens = moduleId.split("."); 
-        const chain = [] 
-        let buffer = "";
-
-        for(let token of tokens) {
-            buffer += token; 
-            const mainFn = (await $app.modules.MAIN_MAP[buffer]()).default;
-            chain.push(mainFn);
-            buffer += "."
-        }
-
-        return chain;
     }
 }
 

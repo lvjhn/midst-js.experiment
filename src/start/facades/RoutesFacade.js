@@ -1,17 +1,24 @@
 /** 
- * Routes Facade
+ * ROUTES FACADE
+ * Facade functions for route context;
  */
 import _ from 'lodash'
 
-class RoutesFacade
+class Routes
 {
+    /** 
+     * Gets the route prefix map of all modules.
+     */
     static routePrefixes() 
     {
         const ROOT = $app.modules.ROOT;
-        let prefixMap = RoutesFacade.scanBaseForPrefix(ROOT, "");
+        let prefixMap = Routes.scanBaseForPrefix(ROOT, "");
         return prefixMap;
     }
 
+    /**
+     * Scans a specified index for prefixes.
+     */
     static scanBaseForPrefix(base, prefix_) 
     {
         let prefixMap = {};
@@ -41,13 +48,16 @@ class RoutesFacade
             const submodule = base.modules[submoduleName];
             prefixMap = {
                 ...prefixMap, 
-                ...RoutesFacade.scanBaseForPrefix(submodule, _prefix + "/")
+                ...Routes.scanBaseForPrefix(submodule, _prefix + "/")
             }
         }
  
         return prefixMap;
     }
 
+    /** 
+     * Gets the route list of all modules.
+     */
     static routeList() 
     {
         const INDEX_MAP = $app.modules.INDEX_MAP;
@@ -97,4 +107,4 @@ class RoutesFacade
         return routeList;
     }
 }
-export default RoutesFacade;
+export default Routes;

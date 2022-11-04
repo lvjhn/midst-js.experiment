@@ -9,6 +9,8 @@
     /** ===== Imports =============== */
     import { ref, computed, watch, onMounted, getCurrentInstance } from 'vue' 
     import { useWindowSize } from 'vue-window-size'
+    import RuntimeFacade from '@facades://RuntimeFacade'
+    import _ from 'lodash'
 
     /** ===== Set-up =============== */
     const instance = getCurrentInstance(); 
@@ -20,6 +22,10 @@
     // const foo = ref("hello");
     // const bar = ref("world!"); 
     // const baz = computed(() => foo.value + bar.value); 
+
+    RuntimeFacade.onRegister(async () => {
+        
+    })
 
     /** ===== Lifecycle =============== */
     onMounted(() => {

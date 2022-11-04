@@ -27,7 +27,7 @@ export default {
         }
     }, 
     moduleOnce(callback) {
-        const currentModule = $app.site.moduleIdx; 
+        const currentModule = $app.runtime.moduleIdx; 
         
         if(currentModule != MODULE_LOCK) 
             MODULE_TIMERS = {};
@@ -43,7 +43,7 @@ export default {
         MODULE_LOCK = currentModule;
     },
     moduleLimit(callback, limit) {
-        const currentModule = $app.site.moduleIdx; 
+        const currentModule = $app.runtime.moduleIdx; 
         
         if(currentModule != MODULE_LOCK) 
             MODULE_TIMERS = {};

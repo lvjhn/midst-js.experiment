@@ -16,11 +16,17 @@ class LocationHelper
             validPrimaryDomains ?? $app.settings.locations.validPrimaryDomains; 
     }
     
+    /**
+     * Get URI of location
+     */
     uri() 
     {
         return URI(this.location);
     }
 
+    /**
+     * Get the primary domain of a location
+     */
     primaryDomain() 
     {
         const uri = this.uri(); 
@@ -36,6 +42,9 @@ class LocationHelper
         return null; 
     }
 
+    /**
+     * Get the subdomain of a location
+     */
     subdomain() 
     {
         const uri = this.uri(); 
@@ -46,16 +55,25 @@ class LocationHelper
         return subdomain; 
     }
 
+    /**
+     * Get subdomains of a location
+     */
     subdomains() 
     {
         return this.subdomain().split("."); 
-    }
+    }   
 
+    /**
+     * Get subdirectories of a location
+     */
     subdirectories() 
     {
         return this.uri().pathname().split("/");
-    }
+    }   
 
+    /**
+     * Checks if a location is designed for mobile site
+     */
     isMobileSite() 
     {
         if($app.settings.routing.mode == "subdomain") {
@@ -75,11 +93,17 @@ class LocationHelper
         return false;    
     }
 
+    /**
+     * Checks if a location is designed for www site
+     */
     isWwwSite() 
     {
         return !this.isMobileSite(); 
     }
 
+    /**
+     * Checks if location has www subdomain
+     */
     withWwwSubdomain() 
     {
         const uri = this.uri(); 
@@ -89,11 +113,17 @@ class LocationHelper
         return startsWithWww;
     }
 
+    /**
+     * Checks if location has no www subdomain
+     */
     withoutWwwSubdomain() 
     {
         return !this.withWwwSubdomain(); 
     }
 
+    /**
+     * Removes www from location
+     */
     removeWwwSubdomain() 
     {
         const uri = this.uri();
@@ -110,6 +140,9 @@ class LocationHelper
         return newURI.toString(); 
     }   
 
+    /**
+     * Adds www to location
+     */
     addWwwSubdomain() 
     {
         const uri = this.uri();
@@ -126,6 +159,9 @@ class LocationHelper
         return newURI.toString();
     }
 
+    /**
+     * Gets the mobile site version of a location
+     */
     mobileSiteLocation() 
     {
         const uri = this.uri();
@@ -173,7 +209,9 @@ class LocationHelper
         return null; 
     }
 
-
+    /**
+     * Gets the www site version of a location
+     */
     wwwSiteLocation() 
     {
         const uri = this.uri(); 
@@ -221,24 +259,33 @@ class LocationHelper
         return null; 
     }
 
+    /**
+     * Checks if location should redirect to mobile site
+     */
     shouldRedirectToMobileSite() 
     {
         return (
             $app.settings.redirects.redirectToMobileSite && 
-            $app.helpers.DeviceHelper.isMobileDevice() && 
+            $app.helpers.Device.isMobileDevice() && 
             !this.isMobileSite() 
         );
     }
 
+    /**
+     * Checks if location should redirect to www site
+     */
     shouldRedirectToWwwSite() 
     {
         return (
             $app.settings.redirects.redirectToWwwSite && 
-            !$app.helpers.DeviceHelper.isMobileDevice() && 
+            !$app.helpers.Device.isMobileDevice() && 
             !this.isWwwSite()    
         );
     }
 
+    /**
+     * Checks if www subdomain should be removed from location
+     */
     shouldRemoveWwwSubdomain() 
     {
         return ( 
@@ -248,6 +295,9 @@ class LocationHelper
         )
     }
 
+    /**
+     * Checks if www subdomain should be added to location
+     */
     shouldAddWwwSubdomain() 
     {
         return (
@@ -257,6 +307,9 @@ class LocationHelper
         )
     }
 
+    /**
+     * Gets the site name of a location (www | mobile)
+     */
     siteName() {
         if(this.isWwwSite())
             return "www"
@@ -266,6 +319,9 @@ class LocationHelper
             return null;
     }
 
+    /**
+     * Prefixes routes with a specified prefix
+     */
     static prefixRoutes(prefix, routes) {
         for(let route of routes) {
             route.path = "/" + prefix + route.path;
@@ -273,6 +329,9 @@ class LocationHelper
         return routes;
     }
 
+    /**
+     * Creates an instance of a location helper for the current location in the browser.
+     */
     static instance() 
     {
         return new LocationHelper();

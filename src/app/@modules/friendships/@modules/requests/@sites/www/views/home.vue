@@ -8,7 +8,8 @@
 <script setup> 
     /** ===== Imports =============== */
     import { ref, computed, watch, onMounted, getCurrentInstance } from 'vue' 
-    import register from "#site://.site/register"
+    import registerSite from "#site://.site/register"
+    import RuntimeFacade from '@facades://RuntimeFacade'
     import { useWindowSize } from 'vue-window-size'
 
     /** ===== Set-up =============== */
@@ -37,9 +38,9 @@
 
     async function reloadContext() 
     {
-        await register();
-        await $app.site.runModMains();
-        await $app.site.main(); 
+        await registerSite();
+        await RuntimeFacade.runModMains();
+        await RuntimeFacade.runSiteMain(); 
         resizeTrait();
     }
 
